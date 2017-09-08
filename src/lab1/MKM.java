@@ -1,7 +1,6 @@
 package lab1;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,12 +11,12 @@ public class MKM extends Generator {
     private final long M = 4294967296L;
     private List<Double> values = new ArrayList<>();
     private List<Double> tmpValues = new ArrayList<>();
-    private double aZero;
+    private double a0;
     private double beta;
 
-    public MKM(long aZero, long c1)
+    public MKM(long a0, long c1)
     {
-        this.aZero = aZero;
+        this.a0 = a0;
         beta = Math.max(c1, M - c1);
     }
 
@@ -26,8 +25,8 @@ public class MKM extends Generator {
     {
         tmpValues.clear();
         values.clear();
-        tmpValues.add(aZero);
-        values.add(aZero/M);
+        tmpValues.add(a0);
+        values.add(a0 / M);
         for(int i = 1; i<=n;i++)
         {
             tmpValues.add((tmpValues.get(i - 1) * beta) % M);
@@ -51,4 +50,7 @@ public class MKM extends Generator {
         return res/1000000;
     }
 
+    public List<Double> getValues() {
+        return values;
+    }
 }

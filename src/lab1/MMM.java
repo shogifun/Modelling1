@@ -1,7 +1,7 @@
 package lab1;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Artem Pesetsky
@@ -12,31 +12,27 @@ public class MMM extends Generator {
     private MKM b;
     private MKM c;
     private ArrayList<Double> values = new ArrayList<>();
-    private int K;
+    private int k;
 
     public MMM(MKM b, MKM c, int k)
     {
         this.b = b;
         this.c = c;
-        K = k;
+        this.k = k;
     }
 
     @Override
     public void generate(int n) {
         values.clear();
-        b.generate(n);
+        b.generate(n + k);
         c.generate(n);
         ArrayList<Double> v = new ArrayList<>();
-        for(int i = 0; i< K; i++)
+        b.getValues().forEach(v::add);
+        for (int i = 0; i < n; i++)
         {
-            v.add(b.getElement(i));
-        }
-
-        for(int i = 0; i<= n; i++)
-        {
-            int s =(int)Math.floor(c.getElement(i) * K / 4294967296L);
+            int s = (int) Math.floor(c.getElement(i) * k);
             values.add(v.get(s));
-            v.set(s, b.getElement(i));
+            v.set(s, b.getElement(i + k));
         }
     }
 
@@ -47,11 +43,9 @@ public class MMM extends Generator {
 
     public double getAverage()
     {
-        double res = 0;
-        for (int i = 1; i<= 1000; i++)
-        {
-            res+= values.get(i);
-        }
-        return res/1000;
+        Optional<Double> res = values.stream().reduce((d1, d2) -> d1 + d2);
+        return res.get() / values.size();
     }
+
+
 }
