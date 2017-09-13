@@ -1,6 +1,9 @@
 package lab1;
 
 import org.apache.commons.math3.special.Erf;
+
+import java.util.Random;
+
 /**
  * Created by Artem Pesetsky
  *
@@ -21,7 +24,7 @@ public class Tests {
         {
             s += (generator.getElement(i) - m) * (generator.getElement(i) - m);
         }
-        s /= n;//n-1???
+        s /= n - 1;
         double xi1 = Math.abs(m - 0.5);
         double xi2 = Math.abs(s - (1 / 12));
         double p1 = 2 * (1 - fi(c1(n) * xi1));

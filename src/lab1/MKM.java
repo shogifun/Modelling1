@@ -8,11 +8,11 @@ import java.util.List;
  * @sinse 06.09.2017
  */
 public class MKM extends Generator {
-    private final long M = 4294967296L;
+    private final long M = 2147483648L;
     private List<Double> values = new ArrayList<>();
-    private List<Double> tmpValues = new ArrayList<>();
-    private double a0;
-    private double beta;
+    private List<Long> tmpValues = new ArrayList<>();
+    private long a0;
+    private long beta;
 
     public MKM(long a0, long c1)
     {
@@ -26,11 +26,12 @@ public class MKM extends Generator {
         tmpValues.clear();
         values.clear();
         tmpValues.add(a0);
-        values.add(a0 / M);
+        double f = (double) a0 / M;
+        values.add((double) a0 / M);
         for(int i = 1; i<=n;i++)
         {
             tmpValues.add((tmpValues.get(i - 1) * beta) % M);
-            values.add(tmpValues.get(i) / M);
+            values.add((double) tmpValues.get(i) / M);
         }
     }
 

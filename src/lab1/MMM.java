@@ -27,7 +27,9 @@ public class MMM extends Generator {
         b.generate(n + k);
         c.generate(n);
         ArrayList<Double> v = new ArrayList<>();
+        b.getValues().remove(0);
         b.getValues().forEach(v::add);
+        c.getValues().remove(0);
         for (int i = 0; i < n; i++)
         {
             int s = (int) Math.floor(c.getElement(i) * k);
