@@ -27,6 +27,7 @@ public class Tests {
         s /= n - 1;
         double xi1 = Math.abs(m - 0.5);
         double xi2 = Math.abs(s - (1 / 12));
+        System.out.print(c2(n));
         double p1 = 2 * (1 - fi(c1(n) * xi1));
         double p2 = 2 * (1 - fi(c2(n) * xi2));
         boolean r1 = eps < p1;

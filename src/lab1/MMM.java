@@ -48,6 +48,4 @@ public class MMM extends Generator {
         Optional<Double> res = values.stream().reduce((d1, d2) -> d1 + d2);
         return res.get() / values.size();
     }
-
-
 }

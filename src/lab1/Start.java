@@ -25,5 +25,8 @@ public class Start {
             System.out.println(i + " - " + generator.getElement(i - 1));
         }
         System.out.println("Moments test - " + Tests.momentsTest(generatorB, 1000, 0.05));
+        System.out.println(generatorB.getPeriod());
+        generatorB.generate(10000);
+        System.out.println(generatorB.getDataForDiagramm());
     }
 }

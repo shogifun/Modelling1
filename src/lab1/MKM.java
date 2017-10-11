@@ -1,6 +1,7 @@
 package lab1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -53,5 +54,51 @@ public class MKM extends Generator {
 
     public List<Double> getValues() {
         return values;
+    }
+
+    public int calculatePeriod() {
+        int period = 0;
+        long ak = a0;
+        while (true) {
+            int k = logarithm(ak, beta);
+            period += k;
+            long val = (long) Math.pow(beta, k);
+            ak = ak * val % M;
+            if (ak == a0) {
+                return period;
+            }
+        }
+    }
+
+    private int logarithm(long a, long b) {
+        double aD = (double) a;
+        double m = (double) M;
+        double lg = Math.log(m / aD) / Math.log(b);
+        return (int) (Math.floor(lg) + 1);
+    }
+
+    public int getPeriod() {
+        int count = 0;
+        long current = a0;
+        while (true) {
+            count++;
+            current = current * beta % M;
+            if (a0 == current) {
+                break;
+            }
+        }
+        return count;
+    }
+
+    public List<Integer> getDataForDiagramm() {
+        ArrayList<Integer> res = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            res.add(0);
+        }
+        for (double d : values) {
+            int index = (int) Math.floor(d * 10);
+            res.set(index, res.get(index) + 1);
+        }
+        return res;
     }
 }
