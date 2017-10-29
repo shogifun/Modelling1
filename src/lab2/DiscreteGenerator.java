@@ -6,6 +6,6 @@ package lab2;
  * @sinse 08.10.2017
  */
 public abstract class DiscreteGenerator {
-    public abstract double getNext();
+    public abstract int getNext();
 
 }

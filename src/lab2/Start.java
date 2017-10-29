@@ -1,6 +1,9 @@
 package lab2;
 
+import org.apache.commons.math3.special.Beta;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Artem Pesetsky
@@ -9,14 +12,14 @@ import java.util.ArrayList;
  */
 public class Start {
     public static void main(String... arg) {
-        /*double [] pi = {0.5, 0, 0.5};
+        double[] pi = {0.5, 0, 0.5};
         double [][] p = {
                 {0.75, 0, 0.25},
                 {0.3, 0.5, 0.2},
                 {0.2, 0.2, 0.6}
         };
         MarcovGenerator chain = new MarcovGenerator(pi, p);
-        System.out.println(chain.getCurrent());
+        System.out.println("Start element " + chain.getCurrent());
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i< 1000; i++)
         {
@@ -31,15 +34,24 @@ public class Start {
         long two = values.stream()
                 .filter(i-> i==2)
                 .count();
+        ReverseBinomialGenerator reverseBinomialGenerator = new ReverseBinomialGenerator(6, 0.75);
 
-        System.out.println(zero);
-        System.out.println(one);
-        System.out.println(two);*/
-        ReverseBinomialGenerator generator = new ReverseBinomialGenerator(6, 0.75);
-        int sum = 0;
-        for (int i = 0; i < 100000; i++) {
-            sum += generator.getNext();
+        System.out.println("0 -  " + zero);
+        System.out.println("1 - " + one);
+        System.out.println("2 - " + two);
+        BernuliGenerator bernuliGenerator = new BernuliGenerator(0.3);
+        System.out.println(Utils.calculateE(1000, bernuliGenerator));
+        System.out.println(Utils.calculateDispersion(1000, bernuliGenerator));
+        System.out.println(Utils.reverseBinomoalE(6, 0.75));
+        System.out.println(Utils.reverseBinomialD(6, 0.75));
+        System.out.println(Utils.calculateE(1000, reverseBinomialGenerator));
+        System.out.println(Utils.calculateDispersion(10000, reverseBinomialGenerator));
+        System.out.println("Practical distribution function" + Arrays.toString(Utils.countF(100, 10, reverseBinomialGenerator)));
+        System.out.println("Teoretical");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(Beta.regularizedBeta(0.75, 6, i + 1) + " , ");
         }
-        System.out.println((double) sum / 100000);
+        System.out.println(Arrays.toString(Utils.composeDataForDiagrams(1000, reverseBinomialGenerator)));
+        System.out.println(Arrays.toString(Utils.composeTeoreticalForDiagrams(0.75, 6, 1000)));
     }
 }

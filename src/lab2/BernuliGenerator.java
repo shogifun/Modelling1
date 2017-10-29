@@ -16,7 +16,7 @@ public class BernuliGenerator extends DiscreteGenerator {
         r = new Random(System.currentTimeMillis());
     }
 
-    public double getNext() {
+    public int getNext() {
         double a = r.nextDouble();
         return a < p ? 1 : 0;
     }

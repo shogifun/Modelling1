@@ -20,18 +20,23 @@ public class ReverseBinomialGenerator extends DiscreteGenerator {
         this.p = p;
     }
 
-    public double getNext() {
+    public int getNext() {
         double a = random.nextDouble();
         double tmp1 = 0;
-        int i = 1;
+        int i = 0;
         double tmp2 = Beta.regularizedBeta(p, r, i + 1);
+        ;
+        //double tmp2 = smile.math.special.Beta.regularizedIncompleteBetaFunction(r, i + 1, p);
+
         while (true) {
             if ((a >= tmp1) && (a < tmp2)) {
                 return i;
             } else {
                 i++;
                 tmp1 = tmp2;
-                tmp2 = Beta.regularizedBeta(p, r, i + 1);
+                tmp2 = Beta.regularizedBeta(p, r, i + 1);//smile.math.special.Beta.regularizedIncompleteBetaFunction(r, i + 1, p);
+
+
             }
         }
     }
