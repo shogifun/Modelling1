@@ -1,5 +1,6 @@
 package lab2;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -41,5 +42,13 @@ public class MarcovGenerator {
             }
         }
         return current;
+    }
+
+    public int[] getChain(int n) {
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = getNext();
+        }
+        return result;
     }
 }
