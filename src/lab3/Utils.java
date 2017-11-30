@@ -70,4 +70,32 @@ public class Utils {
         System.out.println("E = " + distribution.getE());
         System.out.println("D = " + distribution.getD());
     }
+
+    public static void showCorrelation(int n) {
+        double[] all = composeNormal(n * 2);
+        double[] first = new double[n];
+        double[] second = new double[n];
+        double firstE = 0;
+        double secondE = 0;
+        double firstD = 0;
+        double secondD = 0;
+        for (int i = 0; i < n; i++) {
+            first[i] = all[2 * i];
+            firstE += all[2 * i];
+            second[i] = all[2 * i + 1];
+            secondE += all[2 * i + 1];
+        }
+        firstE /= first.length;
+        secondE /= second.length;
+        double sum = 0;
+        for (int i = 0; i < first.length; i++) {
+            double tmp = (first[i] - firstE) * (second[i] - secondE);
+            sum += tmp;
+            firstD += (first[i] - firstE) * (first[i] - firstE);
+            secondD += (second[i] - secondE) * (second[i] - secondE);
+        }
+        firstD /= first.length - 1;
+        secondD /= second.length - 1;
+        System.out.println("Correlation " + sum / Math.sqrt(firstD) / Math.sqrt(secondD) / n);
+    }
 }
